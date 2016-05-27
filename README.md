@@ -22,9 +22,9 @@ The following must be installed and available in your `$PATH`:
 
 * [PhantomJS](http://phantomjs.org/)
 * Python (2.7)
-* [Sendmail](http://en.wikipedia.org/wiki/Sendmail)
+* ~~[Sendmail](http://en.wikipedia.org/wiki/Sendmail)~~ sSMTP
 
-**Note:** Many ISP's block port 25, used for email. If you want to set up email notifications for appointment cancellations and your ISP blocks port 25, a good way around this is to [set up Sendmail to send email through Gmail](http://linuxconfig.org/configuring-gmail-as-sendmail-email-relay).
+**Note:** Many ISP's block port 25, used for email. If you want to set up email notifications for appointment cancellations and your ISP blocks port 25, a good way around this is to ~~[set up Sendmail to send email through Gmail](http://linuxconfig.org/configuring-gmail-as-sendmail-email-relay).~~
 
 ### Configuration ###
 
