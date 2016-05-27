@@ -63,7 +63,7 @@ Content-Type: text/html
 """ % (', '.join(settings['email_to']), settings['email_from'], avail_apt.strftime('%B %d, %Y'), current_apt.strftime('%B %d, %Y'))
 
     try:
-        ssmtp = subprocess.Popen(('/usr/sbin/ssmtp', str(settings['email_to'])), stdin=subprocess.PIPE)
+        ssmtp = subprocess.Popen(('/usr/sbin/ssmtp', (settings['email_to']).encode('ascii')), stdin=subprocess.PIPE)
     except Exception as e: 
         log(e)
     ssmtp.communicate(message)
