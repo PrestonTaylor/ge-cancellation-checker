@@ -50,7 +50,7 @@ def log(msg):
         logfile.write('%s: %s\n' % (datetime.now(), msg))
 
 def send_apt_available_email(current_apt, avail_apt):
-    message = """From: %s
+    body = """From: %s
 To: %s
 Subject: Alert: New Global Entry Appointment Available
 Content-Type: text/html
@@ -63,13 +63,12 @@ Content-Type: text/html
 """ % (settings['email_from'], ', '.join(settings['email_to']), avail_apt.strftime('%B %d, %Y'), current_apt.strftime('%B %d, %Y'))
 
     try:
-        server = smtplib.SMTP('localhost')
-        server.sendmail(settings['email_from'], settings['email_to'], message)
-        server.quit()
+        ssmtp = subprocess.Popen(('/usr/sbin/ssmtp', settings['email_to']), stdin=subprocess.PIPE)
     except Exception as e:
         log('Failed to send success email')
-
-
+    ssmtp.communicate(message % (settings['email_to'], settings['email_from'], body))
+    # wait until the email has finished sending
+    ssmtp.wait()
 
 new_apt_str = check_output(['phantomjs', '%s/ge-cancellation-checker.phantom.js' % PWD]); # get string from PhantomJS script - formatted like 'July 20, 2015'
 new_apt_str = new_apt_str.strip()
