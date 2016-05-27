@@ -50,8 +50,8 @@ def log(msg):
         logfile.write('%s: %s\n' % (datetime.now(), msg))
 
 def send_apt_available_email(current_apt, avail_apt):
-    body = """From: %s
-To: %s
+    message = """To: %s
+From: %s
 Subject: Alert: New Global Entry Appointment Available
 Content-Type: text/html
 
@@ -60,13 +60,13 @@ Content-Type: text/html
 <p>If this sounds good, please sign in to https://goes-app.cbp.dhs.gov/main/goes to reschedule.</p>
 
 <p>If you reschedule, please remember to update CURRENT_INTERVIEW_DATE in your config.json file.</p>
-""" % (settings['email_from'], ', '.join(settings['email_to']), avail_apt.strftime('%B %d, %Y'), current_apt.strftime('%B %d, %Y'))
+""" % (settings['email_to'], ', '.join(settings['email_from']), avail_apt.strftime('%B %d, %Y'), current_apt.strftime('%B %d, %Y'))
 
     try:
         ssmtp = subprocess.Popen(('/usr/sbin/ssmtp', settings['email_to']), stdin=subprocess.PIPE)
-    except Exception as e:
-        log('Failed to send success email')
-    ssmtp.communicate(message % (settings['email_to'], settings['email_from'], body))
+    except Exception as e: 
+        log(e)
+    ssmtp.communicate(message)
     # wait until the email has finished sending
     ssmtp.wait()
 
