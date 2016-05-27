@@ -5,7 +5,7 @@
 from subprocess import check_output
 from datetime import datetime
 from os import path
-import sys, smtplib, json
+import sys, smtplib, json, subprocess
 
 PWD = path.dirname(sys.argv[0]) 
 
