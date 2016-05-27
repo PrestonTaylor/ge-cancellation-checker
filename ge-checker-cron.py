@@ -60,7 +60,7 @@ Content-Type: text/html
 <p>If this sounds good, please sign in to https://goes-app.cbp.dhs.gov/main/goes to reschedule.</p>
 
 <p>If you reschedule, please remember to update CURRENT_INTERVIEW_DATE in your config.json file.</p>
-""" % (settings['email_to'], ', '.join(settings['email_from']), avail_apt.strftime('%B %d, %Y'), current_apt.strftime('%B %d, %Y'))
+""" % (', '.join(settings['email_to']), settings['email_from'], avail_apt.strftime('%B %d, %Y'), current_apt.strftime('%B %d, %Y'))
 
     try:
         ssmtp = subprocess.Popen(('/usr/sbin/ssmtp', settings['email_to']), stdin=subprocess.PIPE)
